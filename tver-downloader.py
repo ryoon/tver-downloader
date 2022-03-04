@@ -46,7 +46,8 @@ import sys
 import argparse
 
 
-ytdlpath = 'yt-dlp'
+ytdlPath = 'yt-dlp'
+maxFilenameLength = 84
 
 tverServer = 'https://tver.jp'
 tverApiServer = 'https://api.tver.jp'
@@ -126,7 +127,11 @@ def getCommandRetVal(command):
 
 
 def downloadTverVideo(URL):
-  command = ytdlpath + ' --concurrent-fragments 3 ' + URL
+  command = ytdlPath + ' --get-filename ' + URL
+  filenameBytes = getCommandResponse(command)[0].strip()
+  trimmedFilenameBytes = filenameBytes[0:234]
+  filenameShort = trimmedFilenameBytes.decode(encoding='utf-8', errors='ignore').replace('.mp4', '') + '.mp4'
+  command = ytdlPath + ' -o "' + filenameShort + '" --concurrent-fragments 3 ' + URL
   ret = getCommandRetVal(command)
   if ret == 0:
     return
