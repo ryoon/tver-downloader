@@ -129,7 +129,7 @@ def getCommandRetVal(command):
 def downloadTverVideo(URL):
   command = ytdlPath + ' --get-filename ' + URL
   filenameBytes = getCommandResponse(command)[0].strip()
-  trimmedFilenameBytes = filenameBytes[0:234]
+  trimmedFilenameBytes = filenameBytes[0:232]
   filenameShort = trimmedFilenameBytes.decode(encoding='utf-8', errors='ignore').replace('.mp4', '') + '.mp4'
   command = ytdlPath + ' -o "' + filenameShort + '" --concurrent-fragments 3 ' + URL
   ret = getCommandRetVal(command)
