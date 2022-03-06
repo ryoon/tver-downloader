@@ -85,9 +85,6 @@ def getTverVideoURLs(query):
   URLs = []
   results = getTverSearchResults(query)
   for result in results:
-    if '【ダイジェスト】' in result['title']:
-      continue
-
     URLs.append(tverServer + result['href'])
 
   return URLs
