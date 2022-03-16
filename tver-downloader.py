@@ -128,7 +128,7 @@ def downloadTverVideo(URL):
   filenameBytes = getCommandResponse(command)[0].strip()
   trimmedFilenameBytes = filenameBytes[0:232]
   filenameShort = trimmedFilenameBytes.decode(encoding='utf-8', errors='ignore').replace('.mp4', '') + '.mp4'
-  command = ytdlPath + ' -o "' + filenameShort + '" --concurrent-fragments 3 ' + URL
+  command = ytdlPath + ' --no-progress -o "' + filenameShort + '" --concurrent-fragments 3 ' + URL
   ret = getCommandRetVal(command)
   if ret == 0:
     return
