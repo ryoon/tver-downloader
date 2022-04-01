@@ -40,10 +40,10 @@ import json
 import time
 import datetime
 import urllib
-import bs4
 import subprocess
 import sys
 import argparse
+import pathlib
 
 
 ytdlPath = 'yt-dlp'
@@ -91,10 +91,13 @@ def getTverVideoURLs(query):
 
 
 def getVideoTitle(URL):
-  response = requests.get(URL)
+  episodeId = pathlib.PurePath(urllib.parse.urlparse(URL).path).name
+  infoURL = 'https://statics.tver.jp/content/episode/' + episodeId + '.json'
+
+  response = requests.get(infoURL)
   if response.status_code == requests.codes.ok:
-    soup = bs4.BeautifulSoup(response.content, 'html.parser')
-    title = soup.find(class_='title').find('h1').text
+    json = response.json()
+    title = json['share']['text'].replace('\n#TVer', '')
 
     return title
   else:
