@@ -28,7 +28,6 @@
 # Generate tiltles list from URLs and download movies with the title from TVer.jp
 #
 # Install:
-# pkgsrc/www/py-beautifulsoup4
 # devel/py-requests
 # net/yt-dlp
 # security/py-cryptodome
@@ -49,34 +48,31 @@ import pathlib
 ytdlPath = 'yt-dlp'
 maxFilenameLength = 84
 
-tverServer = 'https://tver.jp'
-tverApiServer = 'https://api.tver.jp'
+tverVideoBase = 'https://tver.jp/episodes/'
+tverApiServer = 'https://platform-api.tver.jp'
 
-tverAccessTokenURL = tverServer + '/api/access_token.php'
-tverSearchURL = tverApiServer + '/v4/search'
+tverAccessTokensURL = tverApiServer + '/v2/api/platform_users/browser/create'
+tverSearchURL = tverApiServer + '/service/api/v1/callSearch'
 
+def getTverTokens():
+  response = requests.post(tverAccessTokensURL, data='device_type=pc',
+                           headers={'Content-Type': 'application/x-www-form-urlencoded'})
+  print(response.json())
 
-def getTverNow():
-  now = datetime.datetime.now()
-  nowUnixTime = round(now.timestamp() * 1000)
-
-  return nowUnixTime
-
-
-def getTverAccessToken():
-  now = getTverNow()
-  response = requests.get(tverAccessTokenURL, params = {'_t': now})
-
-  return response.json()['token']
+  return response.json()['result']
 
 
 def getTverSearchResults(query):
   encodedQuery = urllib.parse.quote(query)
-  accessToken = getTverAccessToken()
-  searchURL = tverSearchURL + '?catchup=1&token=' + accessToken + '&keyword=' + encodedQuery
+  accessTokens = getTverTokens()
+  platformUid = accessTokens['platform_uid']
+  platformToken = accessTokens['platform_token']
+  searchURL = tverSearchURL + '?platform_uid=' + platformUid + \
+              '&platform_token=' + platformToken + \
+              '&require_data=later&keyword=' + encodedQuery
 
-  response = requests.get(searchURL)
-  results = response.json()['data']
+  response = requests.get(searchURL, headers={'x-tver-platform-type': 'web'})
+  results = response.json()['result']['contents']
 
   return results
 
@@ -85,7 +81,7 @@ def getTverVideoURLs(query):
   URLs = []
   results = getTverSearchResults(query)
   for result in results:
-    URLs.append(tverServer + result['href'])
+    URLs.append(tverVideoBase + result['content']['id'])
 
   return URLs
 
