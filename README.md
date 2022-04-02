@@ -12,12 +12,12 @@ If you are pkgsrc user, install the following packages.
 
 
 ## How to use
-Collect URLs to track to download movies, for example in [URI.txt](URI.txt).
+Collect URLs to track to download movies, for example in [URIs.txt](URIs.txt).
 
 Run with `--gentitle`:
 
 ```
-$ ./tver-downloader.py --gentitle URI.txt titles.txt
+$ ./tver-downloader.py --gentitle URIs.txt titles.txt
 ```
 
 You will get [titles.txt](titles.txt). This will be used more than one downloads.
