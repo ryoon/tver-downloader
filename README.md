@@ -5,7 +5,6 @@ Downloading itself will be done by yt-dlp.
 ## How to install
 If you are pkgsrc user, install the following packages.
 
-* www/py-beautifulsoup4
 * devel/py-requests
 * net/yt-dlp
 * security/py-cryptodome
