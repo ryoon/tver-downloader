@@ -57,12 +57,12 @@ tverSearchURL = tverApiServer + '/service/api/v1/callSearch'
 def getTverTokens():
   response = requests.post(tverAccessTokensURL, data='device_type=pc',
                            headers={'Content-Type': 'application/x-www-form-urlencoded'})
-  print(response.json())
 
   return response.json()['result']
 
 
 def getTverSearchResults(query):
+  print("query:" + query)
   encodedQuery = urllib.parse.quote(query)
   accessTokens = getTverTokens()
   platformUid = accessTokens['platform_uid']
