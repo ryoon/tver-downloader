@@ -82,8 +82,6 @@ def getTverVideoURLs(query):
   results = getTverSearchResults(query)
   for result in results:
     if query in result['content']['seriesTitle']:
-      print(query)
-      print(result['content']['seriesTitle'])
       URLs.append(tverVideoBase + result['content']['id'])
 
   return URLs
