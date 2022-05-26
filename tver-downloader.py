@@ -94,7 +94,8 @@ def getVideoTitle(URL):
   response = requests.get(infoURL)
   if response.status_code == requests.codes.ok:
     json = response.json()
-    title = json['share']['text'].replace('\n#TVer', '')
+    rawTitle = json['share']['text']
+    title = rawTitle.replace('\n#TVer', '')
 
     return title
   else:
