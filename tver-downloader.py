@@ -104,15 +104,15 @@ def getVideoTitle(URL):
 
 def writeTverTitles(URLsFilename, targetFilename):
   titles = []
-  file = open(URLsFilename, 'r')
-  URLs = file.read().splitlines()
+  URL = []
+  with open(URLsFilename, 'r') as file:
+    URLs = file.read().splitlines()
 
   for URL in URLs:
     titles.append(getVideoTitle(URL))
 
-  tf = open(targetFilename, 'w', encoding='utf-8', newline='\n')
-  tf.write('\n'.join(titles) + '\n')
-
+  with open(targetFilename, 'w', encoding='utf-8', newline='\n') as tf:
+    tf.write('\n'.join(titles) + '\n')
 
 def getCommandResponse(command):
   return subprocess.Popen(command, stdout=subprocess.PIPE,
@@ -137,8 +137,9 @@ def downloadTverVideo(URL):
   return
 
 def downloadTverVideos(titleFilename):
-  file = open(titleFilename, 'r')
-  titles = file.read().splitlines()
+  title = []
+  with open(titleFilename, 'r') as file:
+    titles = file.read().splitlines()
   for title in titles:
     print(title)
     URLs = getTverVideoURLs(title)
