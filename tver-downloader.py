@@ -72,10 +72,11 @@ def getTverSearchResults(query):
               '&platform_token=' + platformToken + \
               '&require_data=later&keyword=' + encodedQuery
 
-  response = requests.get(searchURL, headers={'x-tver-platform-type': 'web'})
   try:
+    response = requests.get(searchURL, headers={'x-tver-platform-type': 'web'})
     results = response.json()['result']['contents']
-  except KeyError:
+  except Exception:
+    print('Trying again...')
     time.sleep(5)
     response = requests.get(searchURL, headers={'x-tver-platform-type': 'web'})
     results = response.json()['result']['contents']
