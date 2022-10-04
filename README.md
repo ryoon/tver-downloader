@@ -8,7 +8,7 @@ If you are pkgsrc user, install the following packages.
 * devel/py-requests
 * net/yt-dlp
 * security/py-cryptodome
-* multimedia/ffmpeg4
+* multimedia/ffmpeg5
 
 
 ## How to use

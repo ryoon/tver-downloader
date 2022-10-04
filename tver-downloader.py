@@ -31,7 +31,7 @@
 # devel/py-requests
 # net/yt-dlp
 # security/py-cryptodome
-# multimedia/ffmpeg4
+# multimedia/ffmpeg5
 
 
 import requests
