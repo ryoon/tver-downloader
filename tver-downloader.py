@@ -76,7 +76,7 @@ def getTverSearchResults(query):
     response = requests.get(searchURL, headers={'x-tver-platform-type': 'web'})
     results = response.json()['result']['contents']
   except Exception:
-    print('Trying again...')
+    print('Trying again in 5 seconds...')
     time.sleep(5)
     response = requests.get(searchURL, headers={'x-tver-platform-type': 'web'})
     results = response.json()['result']['contents']
