@@ -46,6 +46,7 @@ import pathlib
 
 
 ytdlPath = 'yt-dlp'
+ffmpegPath = '/usr/pkg/bin/ffmpeg5'
 maxFilenameLength = 84
 
 tverVideoBase = 'https://tver.jp/episodes/'
@@ -133,8 +134,8 @@ def downloadTverVideo(URL):
   command = ytdlPath + ' --get-filename ' + URL
   filenameBytes = getCommandResponse(command)[0].strip()
   trimmedFilenameBytes = filenameBytes[0:232]
-  filenameShort = trimmedFilenameBytes.decode(encoding='utf-8', errors='ignore').replace('.mp4', '') + '.mp4'
-  command = ytdlPath + ' --no-progress -o "' + filenameShort + '" --concurrent-fragments 3 ' + URL
+  filenameShort = trimmedFilenameBytes.decode(encoding='utf-8', errors='ignore').replace('.mp4', '').replace('#', '＃') + '.mp4'
+  command = ytdlPath + ' --ffmpeg-location ' + ffmpegPath + ' --no-progress -o "' + filenameShort + '" --concurrent-fragments 3 ' + URL
   ret = getCommandRetVal(command)
   if ret == 0:
     return
