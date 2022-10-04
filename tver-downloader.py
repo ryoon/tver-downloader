@@ -72,7 +72,12 @@ def getTverSearchResults(query):
               '&require_data=later&keyword=' + encodedQuery
 
   response = requests.get(searchURL, headers={'x-tver-platform-type': 'web'})
-  results = response.json()['result']['contents']
+  try:
+    results = response.json()['result']['contents']
+  except KeyError:
+    time.sleep(5)
+    response = requests.get(searchURL, headers={'x-tver-platform-type': 'web'})
+    results = response.json()['result']['contents']
 
   return results
 
