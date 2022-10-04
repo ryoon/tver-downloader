@@ -1,4 +1,4 @@
-#! /usr/pkg/bin/python3.10
+#!/usr/pkg/bin/python3.10
 
 # Copyright (c) 2022 Ryo ONODERA <ryo@tetera.org>
 # All rights reserved.
