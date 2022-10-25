@@ -53,7 +53,7 @@ tverVideoBase = 'https://tver.jp/episodes/'
 tverApiServer = 'https://platform-api.tver.jp'
 
 tverAccessTokensURL = tverApiServer + '/v2/api/platform_users/browser/create'
-tverSearchURL = tverApiServer + '/service/api/v1/callSearch'
+tverSearchURL = tverApiServer + '/service/api/v1/callKeywordSearch'
 
 def getTverTokens():
   response = requests.post(tverAccessTokensURL, data='device_type=pc',
