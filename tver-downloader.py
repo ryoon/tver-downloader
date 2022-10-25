@@ -45,7 +45,7 @@ import argparse
 import pathlib
 
 
-ytdlPath = 'yt-dlp'
+ytdlPath = '/usr/pkg/bin/yt-dlp'
 ffmpegPath = '/usr/pkg/bin/ffmpeg5'
 maxFilenameLength = 84
 
