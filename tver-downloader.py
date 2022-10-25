@@ -63,7 +63,7 @@ def getTverTokens():
 
 
 def getTverSearchResults(query):
-  print("query:" + query)
+  print("query:", query)
   encodedQuery = urllib.parse.quote(query)
   accessTokens = getTverTokens()
   platformUid = accessTokens['platform_uid']
