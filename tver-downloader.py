@@ -47,7 +47,7 @@ import pathlib
 
 ytdlPath = '/usr/pkg/bin/yt-dlp'
 ffmpegPath = '/usr/pkg/bin/ffmpeg5'
-maxFilenameLength = 84
+maxFilenameLength = 220
 
 tverVideoBase = 'https://tver.jp/episodes/'
 tverApiServer = 'https://platform-api.tver.jp'
