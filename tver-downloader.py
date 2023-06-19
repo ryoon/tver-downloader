@@ -25,7 +25,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# Generate tiltles list from URLs and download movies with the title from TVer.jp
+# Generate titles list from URLs and download movies with the title from TVer.jp
 #
 # Install:
 # devel/py-requests
