@@ -88,7 +88,9 @@ def getTverVideoURLs(query):
   URLs = []
   results = getTverSearchResults(query)
   for result in results:
-    if query in result['content']['seriesTitle']:
+    # Accept search with title not omly seriesTitle.
+    # This is a workaround for too short seriesTitle.
+    if query in result['content']['seriesTitle'] or query in result['content']['title']:
       URLs.append(tverVideoBase + result['content']['id'])
 
   return URLs
