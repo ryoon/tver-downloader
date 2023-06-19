@@ -136,9 +136,9 @@ def getCommandRetVal(command):
 def downloadTverVideo(URL):
   command = ytdlPath + ' --get-filename ' + URL
   filenameBytes = getCommandResponse(command)[0].strip()
-  trimmedFilenameBytes = filenameBytes[0:232]
+  trimmedFilenameBytes = filenameBytes[0:maxFilenameLength]
   filenameShort = trimmedFilenameBytes.decode(encoding='utf-8', errors='ignore').replace('.mp4', '').replace('#', '＃') + '.mp4'
-  command = ytdlPath + ' --ffmpeg-location ' + ffmpegPath + ' --no-progress -o "' + filenameShort + '" --concurrent-fragments 3 ' + URL
+  command = ytdlPath + ' --ffmpeg-location ' + ffmpegPath + ' -o "' + filenameShort + '" --concurrent-fragments 3 ' + URL
   ret = getCommandRetVal(command)
   if ret == 0:
     return
