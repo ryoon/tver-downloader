@@ -1,4 +1,4 @@
-#!/usr/pkg/bin/python3.11
+#!/usr/pkg/bin/python3.12
 
 # Copyright (c) 2022 Ryo ONODERA <ryo@tetera.org>
 # All rights reserved.
@@ -31,7 +31,7 @@
 # devel/py-requests
 # net/yt-dlp
 # security/py-cryptodome
-# multimedia/ffmpeg5
+# multimedia/ffmpeg7
 
 
 import requests
@@ -46,8 +46,8 @@ import pathlib
 
 
 ytdlPath = '/usr/pkg/bin/yt-dlp'
-ffmpegPath = '/usr/pkg/bin/ffmpeg5'
-maxFilenameLength = 220
+ffmpegPath = '/usr/pkg/bin/ffmpeg7'
+maxFilenameLength = '60'
 
 tverVideoBase = 'https://tver.jp/episodes/'
 tverApiServer = 'https://platform-api.tver.jp'
@@ -124,9 +124,10 @@ def writeTverTitles(URLsFilename, targetFilename):
     tf.write('\n'.join(titles) + '\n')
 
 def getCommandResponse(command):
-  return subprocess.Popen(command, stdout=subprocess.PIPE,
+  response = subprocess.Popen(command, stdout=subprocess.PIPE,
     shell=True).communicate()
 
+  return response
 
 def getCommandRetVal(command):
   return subprocess.Popen(command, stdout=None,
@@ -134,11 +135,9 @@ def getCommandRetVal(command):
 
 
 def downloadTverVideo(URL):
-  command = ytdlPath + ' --get-filename ' + URL
+  command = ytdlPath + ' --js-runtimes quickjs --get-filename ' + URL
   filenameBytes = getCommandResponse(command)[0].strip()
-  trimmedFilenameBytes = filenameBytes[0:maxFilenameLength]
-  filenameShort = trimmedFilenameBytes.decode(encoding='utf-8', errors='ignore').replace('.mp4', '').replace('#', '＃') + '.mp4'
-  command = ytdlPath + ' --ffmpeg-location ' + ffmpegPath + ' -o "' + filenameShort + '" --concurrent-fragments 3 ' + URL
+  command = ytdlPath + ' --js-runtimes quickjs --trim-filenames ' + maxFilenameLength + ' --ffmpeg-location ' + ffmpegPath + ' --concurrent-fragments 3 ' + URL
   ret = getCommandRetVal(command)
   if ret == 0:
     return
