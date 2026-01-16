@@ -137,7 +137,7 @@ def getCommandRetVal(command):
 def downloadTverVideo(URL):
   command = ytdlPath + ' --js-runtimes quickjs --get-filename ' + URL
   filenameBytes = getCommandResponse(command)[0].strip()
-  command = ytdlPath + ' --js-runtimes quickjs --trim-filenames ' + maxFilenameLength + ' --ffmpeg-location ' + ffmpegPath + ' --concurrent-fragments 3 ' + URL
+  command = ytdlPath + ' --js-runtimes quickjs --output "%(title).150B [%(id)s].%(ext)s" --ffmpeg-location ' + ffmpegPath + ' --concurrent-fragments 3 ' + URL
   ret = getCommandRetVal(command)
   if ret == 0:
     return
