@@ -1,4 +1,4 @@
-#!/usr/pkg/bin/python3.12
+#!/usr/pkg/bin/python3.13
 
 # Copyright (c) 2022 Ryo ONODERA <ryo@tetera.org>
 # All rights reserved.
@@ -31,7 +31,7 @@
 # devel/py-requests
 # net/yt-dlp
 # security/py-cryptodome
-# multimedia/ffmpeg7
+# multimedia/ffmpeg8
 
 
 import requests
@@ -46,7 +46,7 @@ import pathlib
 
 
 ytdlPath = '/usr/pkg/bin/yt-dlp'
-ffmpegPath = '/usr/pkg/bin/ffmpeg7'
+ffmpegPath = '/usr/pkg/bin/ffmpeg8'
 maxFilenameLength = '60'
 
 tverVideoBase = 'https://tver.jp/episodes/'
